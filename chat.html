@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="chat.css" />
+        <title>chat :)</title>
+    </head>
+    <body>
+        <div id="login_page">
+            <form id="username">
+                <p id="title">your username:</p>
+                <input id="username_input">
+            </form>
+        </div>
+        <div id="main_container">
+            <div id="chat_area">
+                <ul id="message"></ul>
+            </div>
+            <form id="form">
+                <input id="text" placeholder="Type here..."/>
+                <button id="send">send</button>
+            </form>
+        </div>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="/script.js"></script>
+    </body>
+</html>
