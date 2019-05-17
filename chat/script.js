@@ -35,7 +35,7 @@ $(function()
     {
         var newItem = document.createElement("p");
         newItem.id = "join";
-        newItem.innerHTML = '<b>' + name + '</b> ' + 'joined chatroom';
+        newItem.innerHTML = '('+ '<b>' + name + '</b>' + ') ' + ' joined chatroom';
         var list = document.getElementById("message");
         list.appendChild(newItem);
     });
