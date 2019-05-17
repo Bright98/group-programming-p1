@@ -4,4 +4,4 @@ my first project :)
 
 very very simple chat app (socket.io) 
 
-run : node chat.js
+run >> chat/chat.js
