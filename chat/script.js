@@ -1,37 +1,4 @@
 // //client
-// var msg;
-// msg = $('#text').val('');
-// $(function()
-// {
-//     var socket = io();
-//     $('#username').submit(function(event)
-//     {
-//         event.preventDefault();
-//         socket.emit('username', $('#username_input').val());
-//         $('#login_page').fadeOut('fast');
-//         $("#main_container").show();
-//         return false;
-//     });
-//     $('#form').submit(function(event)
-//     {
-//         event.preventDefault();
-//         socket.emit('chat message', $('#text').val());
-//         $('#text').val('');
-//         return false;
-//     });
-//     var user;
-//     socket.on('set username', function(name)
-//     {
-//         user = name.usr;
-//         $("#usr").append($('<li>').text(user));
-//     });
-//     //socket.emit('chat message', {message : msg , _user : user});
-//     socket.on('message', function(data)
-//     {
-//             //$("#usr").append($('<li>').text(data._user));
-//             $("#message").append($('<li>').text(msg));
-//     });
-// });
 
 $(function()
 {
@@ -42,21 +9,40 @@ $(function()
     {
         event.preventDefault();
         username = $('#username_input').val();
-        socket.emit('username', username);
-        $('#login_page').fadeOut('fast');
-        $("#main_container").show();
+        if (username!='')
+        {
+            socket.emit('username', username);
+            $('#login_page').fadeOut('fast');
+            $("#main_container").show();
+        }
+        else
+        {
+            alert('please enter your username :)')
+        }
     });
     $('#form').submit(function(event)
     {
         event.preventDefault();
         msg = $('#text').val();
-        socket.emit('chat message', {message : msg, _user : username});
-        $('#text').val('');
-        return false;
+        if (msg!='')
+        {
+            socket.emit('chat message', {message : msg, _user : username});
+            $('#text').val('');
+        }
+    });
+
+    socket.on('username',function(name)
+    {
+        var newItem = document.createElement("p");
+        newItem.id = "join";
+        newItem.innerHTML = '<b>' + name + '</b> ' + 'joined chatroom';
+        var list = document.getElementById("message");
+        list.appendChild(newItem);
     });
 
     socket.on('chat message', function(data)
     {
-        $("#message").append($('<li>').text(data._user + ":     " + data.message));
+        document.getElementById('message').innerHTML += '<li>' + '<b>' + data._user + '</b>:    ' + data.message + '</li>';
     });
+
 });

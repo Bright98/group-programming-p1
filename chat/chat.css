@@ -76,7 +76,7 @@ body
 #chat_area
 {
     width: 70%;
-    height: 901px;
+    height: 875px;
     margin: auto;
     margin-top: 0;
     overflow-y: scroll;
@@ -145,4 +145,11 @@ body
     font-family:Comic Sans MS;
     font-size: 20px;
     background-color: rgb(90, 156, 145);
+}
+#join
+{
+    font-family:Comic Sans MS;
+    font-size: 20px;
+    text-align: center;
+    color: rgb(49, 49, 49);
 }
