@@ -23,6 +23,8 @@ $(function()
     $('#form').submit(function(event)
     {
         event.preventDefault();
+        var scroll = document.getElementById('chat_area');
+        scroll.scrollTop += 200;
         msg = $('#text').val();
         if (msg!='')
         {
@@ -45,7 +47,7 @@ $(function()
     {
         var newItem = document.createElement('li');
         newItem.id = 'message_li';
-        newItem.innerHTML = '<b>' + data._user + '</b>:    ' + data.message;
+        newItem.innerHTML = '<b>' + data._user + '</b>:     ' + data.message;
         var list = document.getElementById('message');
         list.appendChild(newItem);
     });
@@ -54,7 +56,7 @@ $(function()
     {
         var newItem = document.createElement('li');
         newItem.id = 'msg_li';
-        newItem.innerHTML = '<b>' + data.__user + '</b>:    ' + data._message;
+        newItem.innerHTML = '<b>' + data.__user + '</b>:     ' + data._message;
         var list = document.getElementById('message');
         list.appendChild(newItem);
     });
