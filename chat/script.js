@@ -1,4 +1,4 @@
-// //client
+//client
 
 $(function()
 {
@@ -27,22 +27,36 @@ $(function()
         if (msg!='')
         {
             socket.emit('chat message', {message : msg, _user : username});
+            socket.emit('chat msg', {_message : msg, __user : username});
             $('#text').val('');
         }
     });
 
     socket.on('username',function(name)
     {
-        var newItem = document.createElement("p");
-        newItem.id = "join";
+        var newItem = document.createElement('p');
+        newItem.id = 'join';
         newItem.innerHTML = '('+ '<b>' + name + '</b>' + ') ' + ' joined chatroom';
-        var list = document.getElementById("message");
+        var list = document.getElementById('message');
         list.appendChild(newItem);
     });
 
     socket.on('chat message', function(data)
     {
-        document.getElementById('message').innerHTML += '<li>' + '<b>' + data._user + '</b>:    ' + data.message + '</li>';
+        var newItem = document.createElement('li');
+        newItem.id = 'message_li';
+        newItem.innerHTML = '<b>' + data._user + '</b>:    ' + data.message;
+        var list = document.getElementById('message');
+        list.appendChild(newItem);
+    });
+
+    socket.on('chat msg', function(data)
+    {
+        var newItem = document.createElement('li');
+        newItem.id = 'msg_li';
+        newItem.innerHTML = '<b>' + data.__user + '</b>:    ' + data._message;
+        var list = document.getElementById('message');
+        list.appendChild(newItem);
     });
 
 });
