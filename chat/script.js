@@ -5,28 +5,35 @@ $(function()
     var socket = io();
     var username;
     var msg;
+    var users=[];
     $('#username').submit(function(event)
     {
         event.preventDefault();
         username = $('#username_input').val();
-        if (username!='')
+        if (username=='' || username.replace(/ /g,'')=='')
         {
-            socket.emit('username', username);
-            $('#login_page').fadeOut('fast');
-            $("#main_container").show();
+            alert('please enter your username :)');
         }
         else
         {
-            alert('please enter your username :)')
+            users.push(username);
+            socket.emit('username', username);
+            $('#login_page').fadeOut('fast');
+            $('#main_container').show();
         }
     });
     $('#form').submit(function(event)
     {
         event.preventDefault();
-        var scroll = document.getElementById('chat_area');
+        var scroll = document.getElementById('chat_area');   //for scroll automatically
         scroll.scrollTop += 200;
+
         msg = $('#text').val();
-        if (msg!='')
+        if (msg=='' || msg.replace(/ /g,'')=='')
+        {
+            return false;
+        }
+        else
         {
             socket.emit('chat message', {message : msg, _user : username});
             socket.emit('chat msg', {_message : msg, __user : username});
@@ -47,7 +54,7 @@ $(function()
     {
         var newItem = document.createElement('li');
         newItem.id = 'message_li';
-        newItem.innerHTML = '<b>' + data._user + '</b>:     ' + data.message;
+        newItem.innerHTML = '<b>' + data._user + '</b>:' + '&nbsp &nbsp' + data.message;
         var list = document.getElementById('message');
         list.appendChild(newItem);
     });
@@ -56,7 +63,7 @@ $(function()
     {
         var newItem = document.createElement('li');
         newItem.id = 'msg_li';
-        newItem.innerHTML = '<b>' + data.__user + '</b>:     ' + data._message;
+        newItem.innerHTML = '<b>' + data.__user + '</b>:' + '&nbsp &nbsp' + data._message;
         var list = document.getElementById('message');
         list.appendChild(newItem);
     });
