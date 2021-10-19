@@ -1,7 +1,11 @@
 # group-programming-p1
 
-my first project :)
+<h3> very simple chat webpage (socket.io)</h3> 
+<div>my first project :) </div>
 
-very very simple chat app (socket.io) 
+<br />
 
-run >> chat/chat.js
+- run:
+```shell
+chat/chat.js
+```
